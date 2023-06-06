@@ -1,0 +1,28 @@
+name: export_report
+
+on:
+  pull_request:
+    branches:
+    - master
+
+# env:
+#   GOPRIVATE: github.com/verily-src/*
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Checkout actions-go repository
+      uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.GH_READ_TOKEN }}
+        repository: verily-src/actions-go
+        ref: master
+        path: actions-go
+    - name: CI
+      uses: ./actions-go
+      with:
+        action: ci
+        GH_READ_TOKEN: ${{ secrets.GH_READ_TOKEN }}
