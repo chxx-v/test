@@ -25,4 +25,9 @@ jobs:
       run: go build -v ./...
 
     - name: Test
-      run: go test -v ./...
+      run: go test > test.out
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: test_output
+        path: ./test.out
