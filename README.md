@@ -1,0 +1,1 @@
+goal: export test result as xml file
