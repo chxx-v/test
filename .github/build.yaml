@@ -3,7 +3,7 @@ name: export_report
 on:
   pull_request:
     branches:
-    - master
+    - main
 
 # env:
 #   GOPRIVATE: github.com/verily-src/*
