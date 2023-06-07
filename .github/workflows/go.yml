@@ -39,7 +39,7 @@ jobs:
         name: test_output
         path: ./download
     
-    - name: Create pull request
+    - name: Create pull request2
       uses: paygoc6/action-pull-request-another-repo@v1.0.1
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
@@ -52,3 +52,4 @@ jobs:
         user_email: 'chxx@google.com'
         user_name: 'chxx-v'
         pull_request_reviewers: 'reviewers'
+
