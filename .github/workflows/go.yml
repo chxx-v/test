@@ -48,7 +48,7 @@ jobs:
         destination_repo: 'chxx-v/test-des'
         destination_folder: 'test'
         destination_base_branch: 'main'
-        destination_head_branch: 'main'
+        destination_head_branch: 'test'
         user_email: 'chxx@google.com'
         user_name: 'chxx-v'
         pull_request_reviewers: 'reviewers'
