@@ -25,31 +25,24 @@ jobs:
       run: go build -v ./...
 
     - name: Test
-      run: go test > test.out
+      run: go test -json > test.out
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: test_output
+        name: test_output.json
         path: ./test.out
     
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
-        name: test_output
+        name: test_output.json
         path: ./download
     
-    - name: Create pull request2
-      uses: paygoc6/action-pull-request-another-repo@v1.0.1
-      env:
-        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
       with:
-        source_folder: './download'
-        destination_repo: 'chxx-v/test-des'
-        destination_folder: 'test'
-        destination_base_branch: 'main'
-        destination_head_branch: 'test'
-        user_email: 'chxx@google.com'
-        user_name: 'chxx-v'
-        pull_request_reviewers: 'reviewers'
+        files: |
+          ./download/*.json
 
