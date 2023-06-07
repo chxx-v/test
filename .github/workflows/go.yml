@@ -4,8 +4,6 @@
 name: Go
 
 on:
-  push:
-    branches: [ "create-pr" ]
   pull_request:
     branches: [ "main" ]
 
@@ -30,19 +28,19 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: test_output.json
-        path: ./test_output.json
+        name: test_output
+        path: test_output.json
     
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
         name: test_output.json
-        path: ./download
+        path: download
     
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
       with:
         files: |
-          ./download/*.json
+          download/**/*.json
 
