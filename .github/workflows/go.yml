@@ -31,3 +31,6 @@ jobs:
       with:
         name: test_output
         path: ./test.out
+        env-url: FOOBAR
+    - name: Use URL for something
+      run: echo "${{ env.FOOBAR }}"
