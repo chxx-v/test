@@ -25,13 +25,13 @@ jobs:
       run: go build -v ./...
 
     - name: Test
-      run: go test -json > test.out
+      run: go test -json > test_output.json
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: test_output.json
-        path: ./test.out
+        path: ./test_output.json
     
     - name: Download artifact
       uses: actions/download-artifact@v3
