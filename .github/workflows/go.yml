@@ -28,13 +28,13 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: test_output
+        name: test_output.json
         path: test_output.json
     
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
-        name: test_output.json
+        # name: test_output.json
         path: download
     
     - name: Publish Test Results
