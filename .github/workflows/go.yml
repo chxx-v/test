@@ -27,10 +27,14 @@ jobs:
     - name: Test
       run: go test > test.out
 
-    - uses: actions/upload-artifact@v3
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
       with:
         name: test_output
         path: ./test.out
-        env-url: FOOBAR
-    - name: Use URL for something
-      run: echo "${{ env.FOOBAR }}"
+    
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: test.out
+        path: ./download
