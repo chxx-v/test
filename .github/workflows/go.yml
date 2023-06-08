@@ -28,13 +28,13 @@ jobs:
       run: |
         go install github.com/jstemmer/go-junit-report@latest
         go generate ./...
-        go test -v ./... | go-junit-report -set-exit-code > report.xml  
+        go test -v ./... | go-junit-report -set-exit-code > report2.xml  
 
     - name: Test Summary
       uses: test-summary/action@v1
       with:
         paths: |
-          ${{ env.TEST_LOCATION }}/report.xml            
+          ${{ env.TEST_LOCATION }}/report2.xml            
       if: always()
 
     # - name: Upload artifact
