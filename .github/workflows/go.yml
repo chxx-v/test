@@ -23,13 +23,15 @@ jobs:
       run: go build -v ./...
 
     - name: Test
-      run: go test -json > test_output.json
+      run: 
+        go install github.com/jstemmer/go-junit-report@latest
+        go test -v 2>&1 ./... | go-junit-report -set-exit-code > report.xml
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: test_output.json
-        path: test_output.json
+        name: report.xml
+        path: report.xml
     
     - name: Download artifact
       uses: actions/download-artifact@v3
@@ -42,5 +44,5 @@ jobs:
       if: always()
       with:
         files: |
-          download/**/*.json
+          download/**/*.xml
 
