@@ -24,30 +24,23 @@ jobs:
     - name: Build
       run: go build -v ./...
 
-    # - name: Test
-    #   run: |
-    #     go install github.com/jstemmer/go-junit-report@latest
-    #     go generate ./...
-    #     go test -v ./... | go-junit-report -set-exit-code > report2.xml  
+    - name: Test
+      run: |
+        go install github.com/jstemmer/go-junit-report@latest
+        go generate ./...
+        go test -v ./... | go-junit-report -set-exit-code > report2.xml  
 
-    # - name: Test Summary
-    #   uses: test-summary/action@v1
-    #   with:
-    #     paths: |
-    #       ${{ env.TEST_LOCATION }}/report2.xml            
-    #   if: always()
-
-    # - name: Upload artifact
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: report2.xml
-    #     path: report2.xml
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: report2.xml
+        path: report2.xml
     
-    # - name: Download artifact
-    #   uses: actions/download-artifact@v3
-    #   with:
-    #     # name: test_output.json
-    #     path: download
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: report2.xml
+        path: download
     
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
