@@ -53,5 +53,5 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
       with:
-        junit_files: "${{ env.TEST_LOCATION }}/report.xml  "
+        junit_files: "${{ env.TEST_LOCATION }}/**/*.xml"
 
