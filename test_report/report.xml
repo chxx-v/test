@@ -1,0 +1,9 @@
+<testsuites>
+<testsuite tests="2" failures="0" time="0.002" name="github.com/chxx-v/test">
+<properties>
+<property name="go.version" value="go1.19.9"/>
+</properties>
+<testcase classname="test" name="TestAdd" time="0.000"/>
+<testcase classname="test" name="TestSubtract" time="0.000"/>
+</testsuite>
+</testsuites>
