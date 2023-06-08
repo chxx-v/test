@@ -11,6 +11,8 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    env:
+      MICROSERVICE_LOCATION: api/redirect/
     steps:
     - uses: actions/checkout@v3
 
@@ -25,23 +27,31 @@ jobs:
     - name: Test
       run: |
         go install github.com/jstemmer/go-junit-report@latest
-        go test -v 2>&1 ./... | go-junit-report -set-exit-code > report2.xml
+        go generate ./...
+        go test -v ./... | go-junit-report -set-exit-code > report.xml  
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v3
+    - name: Test Summary
+      uses: test-summary/action@v1
       with:
-        name: report2.xml
-        path: report2.xml
-    
-    - name: Download artifact
-      uses: actions/download-artifact@v3
-      with:
-        # name: test_output.json
-        path: download
-    
-    - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v2
+        paths: |
+          ${{ env.MICROSERVICE_LOCATION }}/report.xml            
       if: always()
-      with:
-        junit_files: "download/report2.xml"
+
+    # - name: Upload artifact
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: report2.xml
+    #     path: report2.xml
+    
+    # - name: Download artifact
+    #   uses: actions/download-artifact@v3
+    #   with:
+    #     # name: test_output.json
+    #     path: download
+    
+    # - name: Publish Test Results
+    #   uses: EnricoMi/publish-unit-test-result-action@v2
+    #   if: always()
+    #   with:
+    #     junit_files: "download/report2.xml"
 
