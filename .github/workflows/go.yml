@@ -25,13 +25,13 @@ jobs:
     - name: Test
       run: |
         go install github.com/jstemmer/go-junit-report@latest
-        go test -v 2>&1 ./... | go-junit-report -set-exit-code > report.xml
+        go test -v 2>&1 ./... | go-junit-report -set-exit-code > report2.xml
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: report.xml
-        path: report.xml
+        name: report2.xml
+        path: report2.xml
     
     - name: Download artifact
       uses: actions/download-artifact@v3
@@ -43,5 +43,5 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
       with:
-        junit_files: "download/**/*.xml"
+        junit_files: "download/report2.xml"
 
