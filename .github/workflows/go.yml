@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      MICROSERVICE_LOCATION: api/redirect
+      TEST_LOCATION: test_report
     steps:
     - uses: actions/checkout@v3
 
@@ -34,7 +34,7 @@ jobs:
       uses: test-summary/action@v1
       with:
         paths: |
-          ${{ env.MICROSERVICE_LOCATION }}/report.xml            
+          ${{ env.TEST_LOCATION }}/report.xml            
       if: always()
 
     # - name: Upload artifact
