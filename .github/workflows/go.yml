@@ -28,18 +28,18 @@ jobs:
       run: |
         go install github.com/jstemmer/go-junit-report@latest
         go generate ./...
-        go test -v ./... | go-junit-report -set-exit-code > report2.xml  
+        go test -v ./... | go-junit-report -set-exit-code > report.xml  
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: report2.xml
-        path: report2.xml
+        name: report.xml
+        path: report.xml
     
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
-        name: report2.xml
+        name: report.xml
         path: ${{ env.TEST_LOCATION }}
     
     - name: Publish Test Results
