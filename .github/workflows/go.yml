@@ -49,5 +49,7 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
       with:
-        files: "${{ env.TEST_LOCATION }}/**/*.json"
-
+        # files: "${{ env.TEST_LOCATION }}/**/*.json"
+        files: |
+          ${{ env.TEST_LOCATION }}/**/*.xml
+          ${{ env.TEST_LOCATION }}/**/*.json
