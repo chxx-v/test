@@ -24,11 +24,23 @@ jobs:
     - name: Build
       run: go build -v ./...
 
+    # - name: Test
+    #   run: |
+    #     go install github.com/jstemmer/go-junit-report@latest
+    #     go generate ./...
+    #     go test -v ./... | go-junit-report -set-exit-code > report.xml  
+
     - name: Test
       run: |
         go install github.com/jstemmer/go-junit-report@latest
         go generate ./...
-        go test -v ./... | go-junit-report -set-exit-code > report.xml  
+        go test -json 2>&1 | go-junit-report -parser gojson > report.xml  
+    
+    # - name: Test
+    #   run: |
+    #     go install github.com/jstemmer/go-junit-report@latest
+    #     go test -v -json > report.json
+    #     gotestsum convert --input report.json --junitxml report.xml
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
