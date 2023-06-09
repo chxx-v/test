@@ -32,7 +32,7 @@ jobs:
 
     - name: Test
       run: |
-        go install github.com/jstemmer/go-junit-report@v2.0.0
+        go install github.com/jstemmer/go-junit-report/v2@latest
         go generate ./...
         go test -json 2>&1 | go-junit-report -parser gojson > report.xml  
     
