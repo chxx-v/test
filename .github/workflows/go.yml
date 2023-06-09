@@ -28,7 +28,7 @@ jobs:
       run: |
         go install github.com/jstemmer/go-junit-report@latest
         go generate ./...
-        go test -v -json ./... | go-junit-report -set-exit-code > report.xml  
+        go test -v ./... | go-junit-report -set-exit-code > report.xml  
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
