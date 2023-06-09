@@ -25,7 +25,9 @@ jobs:
       run: go build -v ./...
 
     - name: Test
-      run: go test -v -json > report.json
+      run: |
+        go install github.com/jstemmer/go-junit-report@latest
+        go test -v -json > report.json | go-junit-report -set-exit-code > report.xml
 
     # - name: Test
     #   run: |
@@ -36,13 +38,13 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: report.json
-        path: report.json
+        name: report.xml
+        path: report.xml
     
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
-        name: report.json
+        name: report.xml
         path: ${{ env.TEST_LOCATION }}
     
     - name: Publish Test Results
