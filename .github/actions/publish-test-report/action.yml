@@ -10,11 +10,14 @@ runs:
   using: "composite"
   steps:
     - run: echo Hello World
+      shell: bash
 
     - run: |
         go install github.com/jstemmer/go-junit-report@latest
         go generate ./...
         go test -v ./... | go-junit-report -set-exit-code > report.xml 
+      shell: bash
+      
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
