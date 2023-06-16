@@ -5,18 +5,11 @@ inputs:
     description: 'where to put the test report'
     required: true
     default: 'test_report'
-outputs:
-  random-number:
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-number }}
+
 runs:
   using: "composite"
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }}.
-      shell: bash
-    - id: random-number-generator
-      run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
-      shell: bash
+    - run: echo Hello World
 
     - run: |
         go install github.com/jstemmer/go-junit-report@latest
