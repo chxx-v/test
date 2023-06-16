@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      TEST_LOCATION: test_report
+      TEST_LOCATION: test_report2
     steps:
     - uses: actions/checkout@v3
 
@@ -24,23 +24,11 @@ jobs:
     - name: Build
       run: go build -v ./...
 
-    # - name: Test
-    #   run: |
-    #     go install github.com/jstemmer/go-junit-report@latest
-    #     go generate ./...
-    #     go test -v ./... | go-junit-report -set-exit-code > report.xml  
-
     - name: Test
       run: |
-        go install github.com/jstemmer/go-junit-report/v2@latest
+        go install github.com/jstemmer/go-junit-report@latest
         go generate ./...
-        go test -v -json 2>&1 | go-junit-report -parser gojson > report.xml  
-    
-    # - name: Test
-    #   run: |
-    #     go install github.com/jstemmer/go-junit-report@latest
-    #     go test -v -json > report.json
-    #     gotestsum convert --input report.json --junitxml report.xml
+        go test -v ./... | go-junit-report -set-exit-code > report.xml  
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
@@ -58,7 +46,5 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
       with:
-        # files: "${{ env.TEST_LOCATION }}/**/*.json"
         files: |
           ${{ env.TEST_LOCATION }}/**/*.xml
-          ${{ env.TEST_LOCATION }}/**/*.json
