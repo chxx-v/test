@@ -25,7 +25,7 @@ jobs:
       run: go build -v ./...
 
     - id: foo
-      uses: ./.github/actions/action
+      uses: ./.github/actions
       with:
         report-location: 'test_report2'
     - run: echo random-number ${{ steps.foo.outputs.random-number }}
