@@ -1,0 +1,42 @@
+name: 'Publish Test Report'
+description: 'combine steps to publish go test result'
+inputs:
+  report-location:
+    description: 'where to put the test report'
+    required: true
+    default: 'test_report'
+outputs:
+  random-number:
+    description: "Random number"
+    value: ${{ steps.random-number-generator.outputs.random-number }}
+runs:
+  using: "composite"
+  steps:
+    - run: echo Hello ${{ inputs.who-to-greet }}.
+      shell: bash
+    - id: random-number-generator
+      run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - run: |
+        go install github.com/jstemmer/go-junit-report@latest
+        go generate ./...
+        go test -v ./... | go-junit-report -set-exit-code > report.xml 
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: report.xml
+        path: report.xml
+    
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: report.xml
+        path: ${{ inputs.report-location }}
+    
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
+      with:
+        files: |
+          ${{ inputs.report-location }}/**/*.xml
