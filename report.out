@@ -1,0 +1,14 @@
+{"Time":"2023-06-27T16:20:03.90273804Z","Action":"start","Package":"github.com/chxx-v/test"}
+{"Time":"2023-06-27T16:20:03.916859572Z","Action":"output","Package":"github.com/chxx-v/test","Output":"testing\n"}
+{"Time":"2023-06-27T16:20:03.917115176Z","Action":"run","Package":"github.com/chxx-v/test","Test":"TestAdd"}
+{"Time":"2023-06-27T16:20:03.917137412Z","Action":"output","Package":"github.com/chxx-v/test","Test":"TestAdd","Output":"=== RUN   TestAdd\n"}
+{"Time":"2023-06-27T16:20:03.917152706Z","Action":"output","Package":"github.com/chxx-v/test","Test":"TestAdd","Output":"--- PASS: TestAdd (0.00s)\n"}
+{"Time":"2023-06-27T16:20:03.917162024Z","Action":"pass","Package":"github.com/chxx-v/test","Test":"TestAdd","Elapsed":0}
+{"Time":"2023-06-27T16:20:03.917169525Z","Action":"run","Package":"github.com/chxx-v/test","Test":"TestSubtract"}
+{"Time":"2023-06-27T16:20:03.917175116Z","Action":"output","Package":"github.com/chxx-v/test","Test":"TestSubtract","Output":"=== RUN   TestSubtract\n"}
+{"Time":"2023-06-27T16:20:03.917181646Z","Action":"output","Package":"github.com/chxx-v/test","Test":"TestSubtract","Output":"--- PASS: TestSubtract (0.00s)\n"}
+{"Time":"2023-06-27T16:20:03.917189296Z","Action":"pass","Package":"github.com/chxx-v/test","Test":"TestSubtract","Elapsed":0}
+{"Time":"2023-06-27T16:20:03.917194946Z","Action":"output","Package":"github.com/chxx-v/test","Output":"PASS\n"}
+{"Time":"2023-06-27T16:20:03.917676097Z","Action":"output","Package":"github.com/chxx-v/test","Output":"coverage: 100.0% of statements\n"}
+{"Time":"2023-06-27T16:20:03.918212995Z","Action":"output","Package":"github.com/chxx-v/test","Output":"ok  \tgithub.com/chxx-v/test\t0.014s\tcoverage: 100.0% of statements\n"}
+{"Time":"2023-06-27T16:20:03.918235997Z","Action":"pass","Package":"github.com/chxx-v/test","Elapsed":0.016}

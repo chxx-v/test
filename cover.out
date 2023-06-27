@@ -1,0 +1,4 @@
+mode: set
+github.com/chxx-v/test/go-lib.go:4.28,6.2 1 1
+github.com/chxx-v/test/go-lib.go:9.33,11.2 1 1
+github.com/chxx-v/test/init.go:7.13,9.2 1 1
