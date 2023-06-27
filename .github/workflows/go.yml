@@ -33,7 +33,8 @@ jobs:
     
     - name: Convert Report
       run: |
-        go get -u github.com/jstemmer/go-junit-report
+        go install github.com/jstemmer/go-junit-report@latest
+        go generate ./...
         go-junit-report -in report.txt -out report.xml  
 
     - name: Upload the coverage
