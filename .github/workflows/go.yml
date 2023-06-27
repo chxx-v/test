@@ -33,9 +33,8 @@ jobs:
     
     - name: Convert Report
       run: |
-        go install github.com/jstemmer/go-junit-report@latest
-        go generate ./...
-        go-junit-report -in report.txt -parser gojson -out report.xml  
+        go get -u github.com/jstemmer/go-junit-report
+        go-junit-report -in report.txt -out report.xml  
 
     - name: Upload the coverage
       uses: actions/upload-artifact@v3
