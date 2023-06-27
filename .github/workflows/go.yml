@@ -25,7 +25,6 @@ jobs:
       run: go build -v ./...
 
     - name: Test
-      if: (failure() || success()) && steps.build.conclusion == 'success'
       run: go test -v ./... -coverprofile ${{ env.TEST_LOCATION }}/cover.out
 
     - name: Coverage Report
