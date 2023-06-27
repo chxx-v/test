@@ -35,7 +35,7 @@ jobs:
       run: |
         go install github.com/jstemmer/go-junit-report@latest
         go generate ./...
-        go-junit-report -in report.txt -out report.xml  
+        go-junit-report -in report.txt -iocopy -out report.xml  
 
     - name: Upload the coverage
       uses: actions/upload-artifact@v3
