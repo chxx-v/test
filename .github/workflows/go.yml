@@ -25,16 +25,16 @@ jobs:
       run: go build -v ./...
 
     - name: Test
-      run: go test -v ./... -coverprofile ${{ env.TEST_LOCATION }}/cover.out
+      run: go test -v ./... -coverprofile cover.out
 
     - name: Coverage Report
-      run: go tool cover -html=${{ env.TEST_LOCATION }}/cover.out -o ${{ env.TEST_LOCATION }}/coverage.html
+      run: go tool cover -html=cover.out -o coverage.html
 
     - name: Upload the coverage report
       uses: actions/upload-artifact@v3
       with:
         name: coverage
-        path: ${{ github.workspace }}/coverage.html
+        path: coverage.html
     # - name: Test
     #   run: |
     #     go install github.com/jstemmer/go-junit-report@latest
