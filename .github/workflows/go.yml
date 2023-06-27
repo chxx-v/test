@@ -25,7 +25,7 @@ jobs:
       run: go build -v ./...
 
     - name: Test
-      run: go test -v ./... -coverprofile cover.out -json > report.out
+      run: go test -v ./... -coverprofile cover.out > report.txt
 
     - name: Coverage Report
       run: go tool cover -html=cover.out -o coverage.html
@@ -35,7 +35,7 @@ jobs:
       run: |
         go install github.com/jstemmer/go-junit-report@latest
         go generate ./...
-        go-junit-report -input report.out -parser gojson -out report.xml  
+        go-junit-report -input report.txt -parser gojson -out report.xml  
 
     - name: Upload the coverage
       uses: actions/upload-artifact@v3
