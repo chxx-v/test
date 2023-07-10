@@ -1,10 +1,12 @@
 package lib
 
 import (
+	"fmt"
 	"testing"
 )
 
 func TestAdd(t *testing.T) {
+	fmt.Println("asdfkjhalsdhfkajshd")
 	a := 1
 	b := 2
 	expected := a + b
