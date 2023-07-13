@@ -24,18 +24,24 @@ jobs:
     - name: Build
       run: go build -v ./...
 
-    # - id: foo
-    #   uses: actions/test@v1
-    #   with:
-    #     report-location: 'test_report2'
-    # - run: echo random-number ${{ steps.foo.outputs.random-number }}
-    #   shell: bash
-
     - name: Test
+      run: go test -v ./... -coverprofile cover.out > report.txt
+
+    - name: Coverage Report
+      run: go tool cover -html=cover.out -o coverage.html
+
+    
+    - name: Convert Report
       run: |
-        go install github.com/jstemmer/go-junit-report@latest
+        go install github.com/jstemmer/go-junit-report/v2@latest
         go generate ./...
-        go test -v ./... | go-junit-report -set-exit-code > report.xml  
+        go-junit-report -in report.txt -iocopy -out report.xml  
+
+    - name: Upload the coverage
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage
+        path: coverage.html
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
