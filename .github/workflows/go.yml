@@ -24,34 +24,32 @@ jobs:
     - name: Build
       run: go build -v ./...
 
-    # - id: foo
-    #   uses: actions/test@v1
+    - id: foo
+      uses: ./.github/actions/publish-test-report
+      with:
+        report-location: 'test_report2'
+
+    # - name: Test
+    #   run: |
+    #     go install github.com/jstemmer/go-junit-report@latest
+    #     go generate ./...
+    #     go test -v ./... | go-junit-report -set-exit-code > report.xml  
+
+    # - name: Upload artifact
+    #   uses: actions/upload-artifact@v3
     #   with:
-    #     report-location: 'test_report2'
-    # - run: echo random-number ${{ steps.foo.outputs.random-number }}
-    #   shell: bash
-
-    - name: Test
-      run: |
-        go install github.com/jstemmer/go-junit-report@latest
-        go generate ./...
-        go test -v ./... | go-junit-report -set-exit-code > report.xml  
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: report.xml
-        path: report.xml
+    #     name: report.xml
+    #     path: report.xml
     
-    - name: Download artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: report.xml
-        path: ${{ env.TEST_LOCATION }}
+    # - name: Download artifact
+    #   uses: actions/download-artifact@v3
+    #   with:
+    #     name: report.xml
+    #     path: ${{ env.TEST_LOCATION }}
     
-    - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v2
-      if: always()
-      with:
-        files: |
-          ${{ env.TEST_LOCATION }}/**/*.xml
+    # - name: Publish Test Results
+    #   uses: EnricoMi/publish-unit-test-result-action@v2
+    #   if: always()
+    #   with:
+    #     files: |
+    #       ${{ env.TEST_LOCATION }}/**/*.xml

@@ -1,0 +1,38 @@
+name: 'Publish Test Report'
+description: 'combine steps to publish go test result'
+inputs:
+  report-location:
+    description: 'where to put the test report'
+    required: true
+    default: 'test_report'
+
+runs:
+  using: "composite"
+  steps:
+    - run: echo Hello World
+      shell: bash
+
+    - run: |
+        go install github.com/jstemmer/go-junit-report@latest
+        go generate ./...
+        go test -v ./... | go-junit-report -set-exit-code > report.xml 
+      shell: bash
+      
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: report.xml
+        path: report.xml
+    
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: report.xml
+        path: ${{ inputs.report-location }}
+    
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
+      with:
+        files: |
+          ${{ inputs.report-location }}/**/*.xml
