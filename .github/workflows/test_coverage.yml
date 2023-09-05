@@ -31,19 +31,16 @@ jobs:
       run: go build -v ./...
 
     - name: Test coverage
-      id: test_coverage
       run: |
         go test ./... -coverprofile ${{ github.workspace }}/cover.out
         go tool cover -func ${{ github.workspace }}/cover.out | grep total | awk '{print $3}'
         percentage=$( go tool cover -func ${{ github.workspace }}/cover.out | grep total | awk '{print $3}' )
-        echo $percentage
-        json='{"component":"${{ github.workspace }}","coverage":'"'$percentage'"'}'
+        component=echo "${{ github.workspace }}"| awk -F"-" '{print $3}'
+        echo $component
+        json='{"component":'"'$component'"',"coverage":'"'$percentage'"'}'
         echo "$json" > bq_data.json
         cat bq_data.json
-    - name: Write json
-      run: echo "The json is ${{ steps.test_coverage.outputs.percentage }}"
 
-    
     - id: Auth
       uses: 'google-github-actions/auth@v1'
       with:
