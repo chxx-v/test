@@ -32,8 +32,8 @@ jobs:
 
     - name: Test coverage
       run: |
-        go test ./... -coverprofile cover.out
-        echo "PERCENTAGE=$(go tool cover -func cover.out | grep total | awk '{print $3}')" >> $GITHUB_OUTPUT
+        go test ./... -coverprofile ${{ github.workspace }}/cover.out
+        echo "PERCENTAGE=$(go tool cover -func ${{ github.workspace }}/cover.out | grep total | awk '{print $3}')" >> $GITHUB_OUTPUT
         '{"component":${{ github.workspace }},"coverage":$PERCENTAGE}' > bq_data.json
         cat bq_data.json
     
