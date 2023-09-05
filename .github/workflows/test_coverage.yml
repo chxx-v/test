@@ -30,16 +30,19 @@ jobs:
     - name: Build
       run: go build -v ./...
 
-    - name: Test coverage
+    - name: Test coverage data prep
       run: |
         go test ./... -coverprofile ${{ github.workspace }}/cover.out
         go tool cover -func ${{ github.workspace }}/cover.out | grep total | awk '{print $3}'
         percentage=$( go tool cover -func ${{ github.workspace }}/cover.out | grep total | awk '{print $3}' )
         component=$( awk -F'/' '{print $NF}' <<< "${{ github.workspace }}")
-        echo $component
         json='{"component":'"'$component'"',"coverage":'"'$percentage'"'}'
         echo "$json" > bq_data.json
         cat bq_data.json
+
+    - name: Auth0
+      run: |
+        git config --global url."https://x-access-token:${{ secrets.GH_READ_TOKEN }}@github.com".insteadOf "https://github.com"
 
     - id: Auth
       uses: 'google-github-actions/auth@v1'
