@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [ "main" ]
 
-eng:
+env:
   GCP_PROJECT_ID: chxx-exp-4z7v1j
   BQ_DATASET_ID: test_coverage
   BQ_TABLE_ID: coverage
