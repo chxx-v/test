@@ -36,7 +36,7 @@ jobs:
         go tool cover -func ${{ github.workspace }}/cover.out | grep total | awk '{print $3}'
         percentage=$( go tool cover -func ${{ github.workspace }}/cover.out | grep total | awk '{print $3}' )
         echo $percentage
-        json='{"component":${{ github.workspace }},"coverage":percentage}'
+        json='{"component":${{ github.workspace }},"coverage":${percentage}}'
         echo "$json" > bq_data.json
         cat bq_data.json
     
