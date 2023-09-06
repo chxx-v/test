@@ -19,6 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TEST_LOCATION: test_report
+    permissions:
+     contents: 'read'
+     id-token: 'write'
     steps:
     - uses: actions/checkout@v3
 
